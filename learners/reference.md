@@ -4,7 +4,7 @@
 
 ### Login
 ```bash
-ssh your_netid@sagehen.cs.pomona.edu
+ssh your_netid@sagehen.hpc.pomona.edu
 ```
 
 ### Module Commands
@@ -262,7 +262,8 @@ Transfer Learn: 1e-5 - 1e-3 (small rate for fine-tuning)
 - **PyTorch**: https://pytorch.org/docs
 - **TensorFlow**: https://tensorflow.org/guide
 - **SLURM**: https://slurm.schedmd.com/quickstart.html
-- **Sagehen Docs**: [institution-specific URL]
+- **Sagehen**: [Introduction to HPC Systems](https://pomona-college.github.io/hpc-intro/) · [SLURM Job Scheduling](https://pomona-college.github.io/hpc-slurm-scheduling/) · [GPU Computing](https://pomona-college.github.io/hpc-gpu-computing/)
+- **Pomona ITS**: <https://www.pomona.edu/its/> · <its-hpc@pomona.edu>
 
 ### Tutorials
 - PyTorch Tutorials: https://pytorch.org/tutorials

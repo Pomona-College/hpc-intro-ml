@@ -24,7 +24,7 @@ For quick testing before running on GPU:
 ### Access Sagehen
 ```bash
 # Log in
-ssh your_netid@sagehen.cs.pomona.edu
+ssh your_netid@sagehen.hpc.pomona.edu
 
 # There are no pytorch/tensorflow modules on Sagehen -- ML frameworks
 # live in conda environments (created in episode 4):
@@ -34,10 +34,14 @@ conda activate pytorch_env    # or tf_env
 
 ### Download Workshop Materials
 ```bash
-# Clone example scripts (will be provided)
-git clone [workshop-materials-url]
-cd ml-hpc-examples
+# The example data and scripts live in the lesson repository
+git clone https://github.com/Pomona-College/hpc-intro-ml.git
+cd hpc-intro-ml/episodes/data
 ```
+
+You only need this if you want the example datasets locally. Everything in the
+episodes can also be typed directly, and the small sample files are reproduced
+inline where they are used.
 
 ### Create Your Working Directory
 ```bash
@@ -99,7 +103,9 @@ Common ML packages available in conda:
 
 ### After Workshop
 - **HPC Support**: its-hpc@pomona.edu
-- **Sagehen Documentation**: [cluster documentation URL]
+- **Sagehen documentation**: the Pomona College HPC Workshop Series — start with
+  [Introduction to HPC Systems](https://pomona-college.github.io/hpc-intro/)
+- **Pomona ITS**: <https://www.pomona.edu/its/>
 - **Framework Documentation**:
   - PyTorch: https://pytorch.org
   - TensorFlow: https://tensorflow.org
