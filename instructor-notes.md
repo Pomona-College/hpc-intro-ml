@@ -304,7 +304,7 @@ Include questions:
 ### External Tutorials
 - PyTorch Distributed Training: https://pytorch.org/tutorials/intermediate/ddp_tutorial.html
 - TensorFlow Distributed: https://tensorflow.org/guide/distributed_training
-- Sagehen User Guide: [institution URL]
+- Sagehen: [Introduction to HPC Systems](https://pomona-college.github.io/hpc-intro/) and [SLURM Job Scheduling](https://pomona-college.github.io/hpc-slurm-scheduling/)
 
 ### Example Datasets
 - MNIST: `torchvision.datasets.MNIST`
