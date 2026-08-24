@@ -1,0 +1,32 @@
+---
+carpentry: 'incubator'
+title: 'Introduction to Machine Learning on HPC — Pomona College HPC Workshop Series'
+created: '2026-03-05'
+license: 'CC-BY 4.0'
+source: 'https://github.com/Pomona-College/hpc-intro-ml'
+url: 'https://pomona-college.github.io/hpc-intro-ml/'
+contact: 'its-hpc@pomona.edu'
+description: 'Machine learning on Sagehen: conda environments, PyTorch and TensorFlow, data pipelines, checkpointing and multi-GPU training.'
+branch: 'main'
+life_cycle: 'stable'
+keywords: 'Pomona College, HPC, research computing, machine-learning, ml, sagehen, pytorch, tensorflow, data-science, deep-learning'
+episodes:
+- 01-why-ml-on-hpc.md
+- 02-ml-workflow-overview.md
+- 03-environment-setup.md
+- 04-loading-ml-frameworks.md
+- 05-data-preparation.md
+- 06-data-pipelines.md
+- 07-training-pytorch.md
+- 08-training-tensorflow.md
+- 09-checkpointing.md
+- 10-slurm-scripts-ml.md
+- 11-hyperparameter-tuning.md
+- 12-ml-best-practices.md
+learners:
+- reference.md
+- setup.md
+instructors:
+- instructor-notes.md
+profiles:
+- learner-profiles.md
