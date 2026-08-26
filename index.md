@@ -23,3 +23,9 @@ For questions or support, contact the Research Computing team at
 :::::::::::::::::::::::::::::::::::::
 
 Designed for researchers new to machine learning on HPC systems, this workshop assumes basic Python knowledge and familiarity with HPC concepts. You will gain practical skills in building, training, and optimizing machine learning models on Sagehen's computational resources.
+
+## Acknowledgments
+
+Developed by **Andrew Wilson**, Director of Research Computing and Digital
+Scholarship at Pomona College, with **Andrei Motchenko**, who tested, edited
+and produced screenshots for the workshop series.
