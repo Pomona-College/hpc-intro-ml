@@ -238,7 +238,7 @@
 ### Room Setup
 - Projector for instructor demos
 - Learners should have laptops
-- Access to Sagehen (SSH client: terminal on Mac, PowerShell/WSL on Windows)
+- Access to Sagehen HPC (SSH client: terminal on Mac, PowerShell/WSL on Windows)
 
 ---
 

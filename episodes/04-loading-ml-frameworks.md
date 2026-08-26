@@ -23,7 +23,7 @@ exercises: 15
 
 For rigorous environment management see Workshop 21 (Reproducible Research Pipelines).
 
-Sagehen has no pre-built `pytorch` or `tensorflow` module, so a conda environment is not an optional upgrade — it is the only way to get either framework running. Conda environments also give you full control: pin every version, install anything from PyPI or conda-forge, and export the result for reproducibility.
+Sagehen HPC has no pre-built `pytorch` or `tensorflow` module, so a conda environment is not an optional upgrade — it is the only way to get either framework running. Conda environments also give you full control: pin every version, install anything from PyPI or conda-forge, and export the result for reproducibility.
 
 The downside is disk space and complexity. Each ML environment can be 5 to 10 GB after `pytorch-cuda` and a few extras. Three or four large environments will eat your /rhome quota. The patterns below keep environments small, reproducible, and fast to recreate.
 

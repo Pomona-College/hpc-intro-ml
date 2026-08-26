@@ -7,7 +7,7 @@ exercises: 20
 :::::::::::::::::::::::::::::::::::::: questions
 - How do you save and resume long-running training jobs?
 - What should a complete checkpoint include?
-- How do you implement multi-GPU training on Sagehen?
+- How do you implement multi-GPU training on Sagehen HPC?
 - How often should you checkpoint, and where should checkpoints live?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -190,7 +190,7 @@ TensorFlow's `MirroredStrategy` handles the same pattern with much less boilerpl
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-## Multi-GPU on Sagehen: when is it worth it?
+## Multi-GPU on Sagehen HPC: when is it worth it?
 
 Sagehen GPU nodes typically host 2 GPUs. Going from 1 to 2 GPUs gives 1.6 to 1.9x speedup, not 2x, because of communication overhead and uneven batch boundaries.
 

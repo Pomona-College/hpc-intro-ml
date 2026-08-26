@@ -5,7 +5,7 @@ exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- How do you load ML modules on Sagehen?
+- How do you load ML modules on Sagehen HPC?
 - What pre-built modules are available for PyTorch and TensorFlow?
 - How do you verify GPU access is working?
 - When should you reuse a shared conda environment vs. build your own?
@@ -24,7 +24,7 @@ Before any model trains, you have to get a Python interpreter, the right framewo
 
 Sagehen has no `pytorch` or `tensorflow` module — Lmod provides the supporting pieces (`miniconda3`, `cuda`), and the framework itself always comes from a conda environment. So the real choice is between reusing an environment someone in your lab already built and building your own. Start by reusing one to confirm the GPU path works end to end, then build your own once you need specific versions or extra packages.
 
-## Understanding Sagehen's Module System
+## Understanding Sagehen HPC's Module System
 
 Sagehen uses Lmod (a module system) to manage software versions. Modules provide pre-configured environments without cluttering your shell. Each module sets `PATH`, `LD_LIBRARY_PATH`, and other environment variables for one specific tool, and `module unload` cleanly reverses those changes.
 
@@ -146,7 +146,7 @@ if torch.cuda.is_available():
     print(f"GPU computation test: PASSED (result shape: {z.shape})")
 ```
 
-![Running the verification script inside the `ml_env` environment.](fig/03-verify-pytorch-cuda.png){alt='Terminal on Sagehen inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes.'}
+![Running the verification script inside the `ml_env` environment.](fig/03-verify-pytorch-cuda.png){alt='Terminal on Sagehen HPC inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes.'}
 
 The GPU name in the output tells you which Sagehen GPU you got. Sagehen has a heterogeneous GPU pool of 10 GPUs total (confirmed May 2026): 4× A100 80 GB, 4× L40S 48 GB, and 2× RTX PRO 6000 96 GB. Without a `--gres` constraint, SLURM hands you whatever is free first.
 
@@ -173,7 +173,7 @@ Most serious research projects end up with their own environment. A shared one i
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Where Conda Lives on Sagehen
+## Where Conda Lives on Sagehen HPC
 
 When you run `conda create -n myenv ...`, the environment is stored under `/rhome/$USER/.conda/envs/myenv`. Each environment with a deep learning framework can easily reach 5 to 10 GB. Your `/rhome` quota is 100 GB. Three or four large ML environments will fill it.
 

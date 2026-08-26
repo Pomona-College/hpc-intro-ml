@@ -41,7 +41,7 @@ Data size directly impacts both training time and memory requirements:
 
 **Example**: Image classification with ImageNet (150 GB)
 - Laptop: Weeks of training (slow disk I/O, CPU bottleneck)
-- Sagehen GPU: 1-3 days (parallel I/O, GPU acceleration)
+- Sagehen HPC GPU: 1-3 days (parallel I/O, GPU acceleration)
 
 ### Scenario 2: Long Training Times
 

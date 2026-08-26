@@ -76,7 +76,7 @@ NB: The published copy of the lesson is in the `main` branch.
 ### Other Resources
 
 This lesson is maintained by the Pomona College ITS Research Computing team.
-For questions about the Sagehen cluster or the workshop programme, [contact us
+For questions about the Sagehen HPC cluster or the workshop programme, [contact us
 by email][contact].
 
 [repo]: https://github.com/Pomona-College/hpc-intro-ml

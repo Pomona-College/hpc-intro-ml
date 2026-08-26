@@ -5,7 +5,7 @@ exercises: 25
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- How do you set up PyTorch for GPU training on Sagehen?
+- How do you set up PyTorch for GPU training on Sagehen HPC?
 - What does an efficient training loop look like?
 - How do you handle GPU memory errors?
 - How do you choose between A100, L40S, and RTX PRO 6000 nodes for your job?

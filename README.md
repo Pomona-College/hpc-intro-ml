@@ -4,7 +4,7 @@ Pomona College HPC Workshop Series
 
 ## Overview
 
-This workshop teaches machine learning practitioners when and how to use HPC clusters for model training and inference. Participants learn to identify machine learning bottlenecks that HPC solves, including large datasets, long training times, and hyperparameter searches. The workshop covers environment setup, data preparation, training with PyTorch and TensorFlow on Sagehen's GPU nodes, submitting long-running jobs, and following best practices for reproducible ML research.
+This workshop teaches machine learning practitioners when and how to use HPC clusters for model training and inference. Participants learn to identify machine learning bottlenecks that HPC solves, including large datasets, long training times, and hyperparameter searches. The workshop covers environment setup, data preparation, training with PyTorch and TensorFlow on Sagehen HPC's GPU nodes, submitting long-running jobs, and following best practices for reproducible ML research.
 
 ## Episodes
 
