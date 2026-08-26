@@ -66,3 +66,11 @@ This workshop is licensed under [CC-BY 4.0](https://creativecommons.org/licenses
 ## Citation
 
 Wilson, A. (2026). *Introduction to Machine Learning on HPC*. Pomona College ITS Research Computing.
+
+## Acknowledgments
+
+**Andrew Wilson** — Director of Research Computing and Digital Scholarship,
+Pomona College. Workshop design and development.
+
+**Andrei Motchenko** — testing, editing, cleanup and screenshots across the
+Pomona College HPC Workshop Series.
