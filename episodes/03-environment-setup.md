@@ -254,7 +254,7 @@ This isolates the collaborator's exact stack in your own environment without tou
 - `module load miniconda3`, then `conda activate` an existing environment, is the quickest way to start
 - `module show NAME` reveals what a module actually does (CUDA version, dependencies)
 - Always re-load modules inside SLURM scripts; the login-node environment does not transfer
-- CUDA 12.1 is the system version on Sagehen
+- Sagehen's GPU driver reports CUDA 12.7; the newest CUDA *toolkit* module is `cuda/12.2.1`. They are different things and do not need to match
 - Always test GPU access with small verification scripts before large jobs
 - Roll your own conda environment when you need pinned versions or extra packages
 - Conda environments can be moved to /bigdata if /rhome quota gets tight

@@ -180,10 +180,10 @@ The second most common cause is running on the login node. The login node has no
 ### Problem 3: "CUDA/cuDNN version mismatch"
 
 ```bash
-# Check CUDA version on system
-nvidia-smi  # Should show CUDA 12.1
+# Driver's CUDA capability -- on Sagehen's GPU nodes this reports 12.7
+nvidia-smi
 
-# Check PyTorch CUDA version
+# What PyTorch was actually built against
 python3 -c "import torch; print(torch.version.cuda)"
 
 # If mismatch, specify correct version
@@ -191,6 +191,27 @@ conda install pytorch pytorch-cuda=12.1 -c pytorch -c nvidia -y
 ```
 
 The PyTorch CUDA toolkit must be less than or equal to the system CUDA driver version. `nvidia-smi` reports the driver capability; `torch.version.cuda` reports what PyTorch was built against. As long as PyTorch's CUDA is `<=` the driver's, things work.
+
+::::::::::::::::::::::::::::::::::::: callout
+
+## Three Different "CUDA Versions" — Don't Confuse Them
+
+This trips people up constantly, because all three are called "CUDA":
+
+| What | Where you see it | On Sagehen |
+|---|---|---|
+| **Driver** capability | `nvidia-smi`, top right | **12.7** |
+| **Toolkit** module | `module avail cuda` | 11.8.0, 12.0.0, **12.2.1** (default) |
+| What **PyTorch** was built against | `torch.version.cuda` | whatever `pytorch-cuda=` you installed |
+
+The rule is only ever: **PyTorch's CUDA ≤ the driver's CUDA.** `pytorch-cuda=12.1`
+is fine against a 12.7 driver, and it does not need to match the toolkit module
+number at all — conda ships its own CUDA runtime inside the environment.
+
+So a "CUDA version mismatch" almost never means "these numbers differ". It means
+PyTorch was built for a *newer* CUDA than the driver supports.
+
+::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Problem 4: "/rhome quota exceeded"
 
