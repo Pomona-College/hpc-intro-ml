@@ -20,7 +20,7 @@ exercises: 20
 
 ## Why Data Pipelines Matter on HPC
 
-A modern A100 80GB GPU on Sagehen HPC can process roughly 5,000 to 20,000 training images per second once data sits in GPU memory. Reading those same images from `/bigdata` (parallel NFS, ~200 MB/s) into RAM, decoding them, and copying them to the device can take ten times longer than the forward and backward pass. The result is a $20,000 GPU sitting at 5% utilization while you wait for disk.
+A modern A100 80GB GPU on Sagehen HPC can process roughly 5,000 to 20,000 training images per second once data sits in GPU memory. Reading those same images from `/bigdata` (BeeGFS, a shared parallel filesystem, ~200 MB/s for this kind of many-small-file access) into RAM, decoding them, and copying them to the device can take ten times longer than the forward and backward pass. The result is a $20,000 GPU sitting at 5% utilization while you wait for disk.
 
 A good data pipeline does three things at once. It moves data from persistent storage onto fast scratch storage. It transforms raw inputs into model-ready tensors using as many CPU cores as the node provides. And it overlaps that transformation with GPU compute so the next batch is ready by the time the current batch finishes. When the pipeline is set up correctly, GPU utilization climbs past 90%. When it is not, your job spends most of its allocated time waiting on I/O.
 

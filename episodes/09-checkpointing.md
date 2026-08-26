@@ -104,7 +104,7 @@ For very fast epochs (under a minute), checkpoint every N epochs instead.
 
 For very slow epochs (over an hour), checkpoint mid-epoch using `torch.save` calls inside the training loop on a step-count condition.
 
-For the largest models where each checkpoint is many GB, save to `/scratch` during the run and only move the final or best to `/bigdata`. Hammering NFS with frequent multi-GB writes is rude.
+For the largest models where each checkpoint is many GB, save to `/scratch` during the run and only move the final or best to `/bigdata`. Hammering the shared BeeGFS filesystem with frequent multi-GB writes slows the cluster down for everyone.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
