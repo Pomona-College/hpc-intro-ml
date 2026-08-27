@@ -6,7 +6,7 @@ exercises: 5
 
 :::::::::::::::::::::::::::::::::::::: questions
 - How do CPUs and GPUs compare for different ML workloads?
-- What GPU options are available on Sagehen?
+- What GPU options are available on Sagehen HPC?
 - What does a typical ML workflow on HPC look like?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -40,7 +40,7 @@ exercises: 5
 - Batch processing
 - Any framework with CUDA support (PyTorch, TensorFlow)
 
-### Sagehen's GPU Options
+### Sagehen HPC's GPU Options
 
 ```
 GPU Type      VRAM       Best For                         Units
@@ -68,7 +68,9 @@ Real-world speedups on Sagehen:
 
 **Key insight**: GPUs excel at deep learning but don't help with data I/O or tree-based models.
 
-## Sagehen ML Infrastructure
+![Size the problem before assuming you need the cluster.](fig/02-when-hpc.png){alt='Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing.'}
+
+## Sagehen HPC ML Infrastructure
 
 ### Storage Architecture
 
@@ -97,7 +99,7 @@ Real-world speedups on Sagehen:
 - **short partition**: Quick test / debug jobs with a shorter max walltime (check `sinfo -p short`)
 - **OnDemand web interface**: Interactive Jupyter notebooks with optional GPU
 
-## Typical ML Workflow on Sagehen
+## Typical ML Workflow on Sagehen HPC
 
 ```
 PHASE 1: Local Development (Laptop)

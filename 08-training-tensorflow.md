@@ -5,7 +5,7 @@ exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- How do you set up TensorFlow for GPU training on Sagehen?
+- How do you set up TensorFlow for GPU training on Sagehen HPC?
 - What are the differences between PyTorch and TensorFlow workflows?
 - How do you use Keras for rapid model development?
 - When should you choose TensorFlow over PyTorch (and vice versa)?
@@ -36,7 +36,7 @@ TensorFlow/Keras:    Was declarative (TF1) and now hybrid (TF2 eager), strong in
 
 Most ML coursework at Pomona and most arXiv papers since 2022 ship in PyTorch. If your collaborators or advisor use TensorFlow, or your downstream pipeline needs TFLite or TF Serving, TensorFlow is the right call. Otherwise default to PyTorch and revisit only if there is a specific reason.
 
-## Setting Up TensorFlow on Sagehen
+## Setting Up TensorFlow on Sagehen HPC
 
 The cluster has a system module for TensorFlow, but creating your own conda environment is usually safer because version pinning is in your control:
 

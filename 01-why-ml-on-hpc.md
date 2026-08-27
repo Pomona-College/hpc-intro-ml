@@ -27,6 +27,8 @@ Machine learning practitioners often run into walls where their laptop simply ca
 
 These bottlenecks are not performance annoyances; they're project stoppers. This is where HPC becomes essential.
 
+![Only one stage of the workflow actually needs a GPU.](fig/01-ml-workflow.png){alt='A machine learning workflow: collect and clean data, feature engineering, choose a model, train on GPU, evaluate, and then iterate back to feature engineering, where most of the work happens. A note observes that only the training box needs a GPU and the rest runs on the amd partition, usually taking longer.'}
+
 ## When HPC is Necessary
 
 ### Scenario 1: Large Datasets
@@ -41,7 +43,7 @@ Data size directly impacts both training time and memory requirements:
 
 **Example**: Image classification with ImageNet (150 GB)
 - Laptop: Weeks of training (slow disk I/O, CPU bottleneck)
-- Sagehen GPU: 1-3 days (parallel I/O, GPU acceleration)
+- Sagehen HPC GPU: 1-3 days (parallel I/O, GPU acceleration)
 
 ### Scenario 2: Long Training Times
 

@@ -20,11 +20,13 @@ exercises: 20
 
 ## Why Data Pipelines Matter on HPC
 
-A modern A100 80GB GPU on Sagehen can process roughly 5,000 to 20,000 training images per second once data sits in GPU memory. Reading those same images from `/bigdata` (parallel NFS, ~200 MB/s) into RAM, decoding them, and copying them to the device can take ten times longer than the forward and backward pass. The result is a $20,000 GPU sitting at 5% utilization while you wait for disk.
+A modern A100 80GB GPU on Sagehen HPC can process roughly 5,000 to 20,000 training images per second once data sits in GPU memory. Reading those same images from `/bigdata` (BeeGFS, a shared parallel filesystem, ~200 MB/s for this kind of many-small-file access) into RAM, decoding them, and copying them to the device can take ten times longer than the forward and backward pass. The result is a $20,000 GPU sitting at 5% utilization while you wait for disk.
 
 A good data pipeline does three things at once. It moves data from persistent storage onto fast scratch storage. It transforms raw inputs into model-ready tensors using as many CPU cores as the node provides. And it overlaps that transformation with GPU compute so the next batch is ready by the time the current batch finishes. When the pipeline is set up correctly, GPU utilization climbs past 90%. When it is not, your job spends most of its allocated time waiting on I/O.
 
 This episode covers the two halves of that pipeline separately. First, large-scale preprocessing with Dask, run as a CPU-only batch job before training. Second, the per-batch loading machinery that PyTorch and TensorFlow use during training itself.
+
+![Every GPU holds the whole model; only the data is split.](fig/06-distributed-training.png){alt='Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times.'}
 
 ## Large-Scale Preprocessing with Dask
 

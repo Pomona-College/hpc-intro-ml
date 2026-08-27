@@ -12,7 +12,7 @@ exercises: 20
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Understand data layout and I/O optimization on Sagehen
+- Understand data layout and I/O optimization on Sagehen HPC
 - Handle missing values, normalize features, and encode categorical variables
 - Avoid data leakage and class imbalance pitfalls
 - Recognize when to graduate from pandas to Dask
@@ -28,7 +28,7 @@ In real ML workflows:
 
 The preparation phase is where most projects die quietly. A model trained on subtly leaky data looks great on validation and falls apart in deployment. A model trained on imbalanced classes optimizes the majority class and ignores the minority class entirely. A model with the wrong feature scaling never converges. Each of these is fixable in 20 lines of preprocessing code, but only if you know to look.
 
-## Data Placement Strategy on Sagehen
+## Data Placement Strategy on Sagehen HPC
 
 For ML workflows on GPU nodes:
 

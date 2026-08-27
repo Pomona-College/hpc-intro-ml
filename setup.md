@@ -4,7 +4,7 @@
 
 ### Computer and Internet
 - A laptop or desktop with internet connection
-- SSH access to Sagehen (Pomona's HPC cluster)
+- SSH access to Sagehen HPC (Pomona's HPC cluster)
 - A terminal application (Terminal on Mac, PowerShell or WSL on Windows)
 
 ### Accounts
@@ -21,7 +21,7 @@ For quick testing before running on GPU:
 
 ## During the Workshop
 
-### Access Sagehen
+### Access Sagehen HPC
 ```bash
 # Log in
 ssh your_netid@sagehen.hpc.pomona.edu
@@ -57,7 +57,7 @@ mkdir -p data models logs
 there fails with `Permission denied`. Create scratch directories inside a job
 (`srun` or `sbatch`) only, and treat anything left there as gone once the job ends.
 
-## Hardware Available on Sagehen
+## Hardware Available on Sagehen HPC
 
 Sagehen provides 10 GPUs across A100/L40S/RTX PRO 6000 generations (confirmed May 2026); see Workshop 16 for full hardware details.
 

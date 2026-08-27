@@ -7,7 +7,7 @@ exercises: 20
 :::::::::::::::::::::::::::::::::::::: questions
 - How do you save and resume long-running training jobs?
 - What should a complete checkpoint include?
-- How do you implement multi-GPU training on Sagehen?
+- How do you implement multi-GPU training on Sagehen HPC?
 - How often should you checkpoint, and where should checkpoints live?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -23,6 +23,8 @@ exercises: 20
 GPU jobs on Sagehen can run for many hours, and time-limit boundaries, hardware faults, queue evictions, and your own bugs can interrupt training at any point. Without checkpoints, an interruption at hour 23 of a 24-hour run loses everything. With checkpoints saved every 30 minutes, you lose at most 30 minutes of work and resume from the last good state.
 
 Checkpointing is also the foundation for two other patterns: hyperparameter sweeps that need to fork from a common pretrained state, and analysis runs that need to inspect a model at multiple points in training to understand its learning dynamics.
+
+![Save to /bigdata — /scratch disappears with the job.](fig/04-checkpointing.png){alt='A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate.'}
 
 ## What Goes In a Checkpoint
 
@@ -104,7 +106,7 @@ For very fast epochs (under a minute), checkpoint every N epochs instead.
 
 For very slow epochs (over an hour), checkpoint mid-epoch using `torch.save` calls inside the training loop on a step-count condition.
 
-For the largest models where each checkpoint is many GB, save to `/scratch` during the run and only move the final or best to `/bigdata`. Hammering NFS with frequent multi-GB writes is rude.
+For the largest models where each checkpoint is many GB, save to `/scratch` during the run and only move the final or best to `/bigdata`. Hammering the shared BeeGFS filesystem with frequent multi-GB writes slows the cluster down for everyone.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -190,7 +192,7 @@ TensorFlow's `MirroredStrategy` handles the same pattern with much less boilerpl
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-## Multi-GPU on Sagehen: when is it worth it?
+## Multi-GPU on Sagehen HPC: when is it worth it?
 
 Sagehen GPU nodes typically host 2 GPUs. Going from 1 to 2 GPUs gives 1.6 to 1.9x speedup, not 2x, because of communication overhead and uneven batch boundaries.
 
