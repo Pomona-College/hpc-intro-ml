@@ -366,7 +366,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Loading ML Frameworks</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/04-loading-ml-frameworks.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -412,7 +412,7 @@ quota?</li>
 <section><h2 class="section-heading" id="why-custom-environments-eventually-become-necessary">Why Custom Environments Eventually Become Necessary<a class="anchor" aria-label="anchor" href="#why-custom-environments-eventually-become-necessary"></a></h2>
 <hr class="half-width"><p>For rigorous environment management see Workshop 21 (Reproducible
 Research Pipelines).</p>
-<p>Sagehen has no pre-built <code>pytorch</code> or
+<p>Sagehen HPC has no pre-built <code>pytorch</code> or
 <code>tensorflow</code> module, so a conda environment is not an
 optional upgrade — it is the only way to get either framework running.
 Conda environments also give you full control: pin every version,
@@ -646,10 +646,10 @@ with <code>nvidia-smi</code>.</div>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="co"># Check CUDA version on system</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="ex">nvidia-smi</span>  <span class="co"># Should show CUDA 12.1</span></span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="co"># Driver's CUDA capability -- on Sagehen's GPU nodes this reports 12.7</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="ex">nvidia-smi</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a><span class="co"># Check PyTorch CUDA version</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a><span class="co"># What PyTorch was actually built against</span></span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a><span class="ex">python3</span> <span class="at">-c</span> <span class="st">"import torch; print(torch.version.cuda)"</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1" aria-label="code-block-10-6"></a></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1" aria-label="code-block-10-7"></a><span class="co"># If mismatch, specify correct version</span></span>
@@ -660,6 +660,42 @@ CUDA driver version. <code>nvidia-smi</code> reports the driver
 capability; <code>torch.version.cuda</code> reports what PyTorch was
 built against. As long as PyTorch’s CUDA is <code>&lt;=</code> the
 driver’s, things work.</p>
+<div id="three-different-cuda-versions-dont-confuse-them" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="three-different-cuda-versions-dont-confuse-them" class="callout-inner">
+<h3 class="callout-title">Three Different “CUDA Versions” — Don’t
+Confuse Them</h3>
+<div class="callout-content">
+<p>This trips people up constantly, because all three are called
+“CUDA”:</p>
+<table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th>What</th>
+<th>Where you see it</th>
+<th>On Sagehen</th>
+</tr></thead><tbody><tr><td>
+<strong>Driver</strong> capability</td>
+<td>
+<code>nvidia-smi</code>, top right</td>
+<td><strong>12.7</strong></td>
+</tr><tr><td>
+<strong>Toolkit</strong> module</td>
+<td><code>module avail cuda</code></td>
+<td>11.8.0, 12.0.0, <strong>12.2.1</strong> (default)</td>
+</tr><tr><td>What <strong>PyTorch</strong> was built against</td>
+<td><code>torch.version.cuda</code></td>
+<td>whatever <code>pytorch-cuda=</code> you installed</td>
+</tr></tbody></table><p>The rule is only ever: <strong>PyTorch’s CUDA ≤ the driver’s
+CUDA.</strong> <code>pytorch-cuda=12.1</code> is fine against a 12.7
+driver, and it does not need to match the toolkit module number at all —
+conda ships its own CUDA runtime inside the environment.</p>
+<p>So a “CUDA version mismatch” almost never means “these numbers
+differ”. It means PyTorch was built for a <em>newer</em> CUDA than the
+driver supports.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="problem-4-rhome-quota-exceeded">Problem 4: “/rhome quota exceeded”<a class="anchor" aria-label="anchor" href="#problem-4-rhome-quota-exceeded"></a></h3>
@@ -675,7 +711,7 @@ driver’s, things work.</p>
 </div>
 <p>Caches alone can be a few GB. <code>conda clean -a</code> is safe to
 run periodically.</p>
-<div id="callout2" class="callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -831,8 +867,8 @@ usually environment setup issues</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/04-loading-ml-frameworks.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/04-loading-ml-frameworks.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

@@ -367,7 +367,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Pipelines for HPC</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/06-data-pipelines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -410,12 +410,13 @@ training?</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="why-data-pipelines-matter-on-hpc">Why Data Pipelines Matter on HPC<a class="anchor" aria-label="anchor" href="#why-data-pipelines-matter-on-hpc"></a></h2>
-<hr class="half-width"><p>A modern A100 80GB GPU on Sagehen can process roughly 5,000 to 20,000
-training images per second once data sits in GPU memory. Reading those
-same images from <code>/bigdata</code> (parallel NFS, ~200 MB/s) into
-RAM, decoding them, and copying them to the device can take ten times
-longer than the forward and backward pass. The result is a $20,000 GPU
-sitting at 5% utilization while you wait for disk.</p>
+<hr class="half-width"><p>A modern A100 80GB GPU on Sagehen HPC can process roughly 5,000 to
+20,000 training images per second once data sits in GPU memory. Reading
+those same images from <code>/bigdata</code> (BeeGFS, a shared parallel
+filesystem, ~200 MB/s for this kind of many-small-file access) into RAM,
+decoding them, and copying them to the device can take ten times longer
+than the forward and backward pass. The result is a $20,000 GPU sitting
+at 5% utilization while you wait for disk.</p>
 <p>A good data pipeline does three things at once. It moves data from
 persistent storage onto fast scratch storage. It transforms raw inputs
 into model-ready tensors using as many CPU cores as the node provides.
@@ -427,7 +428,9 @@ job spends most of its allocated time waiting on I/O.</p>
 First, large-scale preprocessing with Dask, run as a CPU-only batch job
 before training. Second, the per-batch loading machinery that PyTorch
 and TensorFlow use during training itself.</p>
-</section><section><h2 class="section-heading" id="large-scale-preprocessing-with-dask">Large-Scale Preprocessing with Dask<a class="anchor" aria-label="anchor" href="#large-scale-preprocessing-with-dask"></a></h2>
+<figure><img src="../fig/06-distributed-training.png" alt="Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times." class="figure mx-auto d-block"><div class="figcaption">Every GPU holds the whole model; only the data
+is split.</div>
+</figure></section><section><h2 class="section-heading" id="large-scale-preprocessing-with-dask">Large-Scale Preprocessing with Dask<a class="anchor" aria-label="anchor" href="#large-scale-preprocessing-with-dask"></a></h2>
 <hr class="half-width"><p>When the raw dataset is larger than a single node’s 512 GB of RAM, or
 when the cleaning step itself is too slow on one core, Dask gives you
 parallel pandas-like operations across many cores or many nodes. On a
@@ -728,7 +731,7 @@ go for that later job to find it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -795,7 +798,7 @@ predict the effect of each.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li><p>Stage the JPEG directory to <code>/scratch</code> at job start.
 Expected: GPU utilization climbs to 60 to 80% if I/O was the bottleneck.
@@ -899,8 +902,8 @@ a model problem</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/instructor/06-data-pipelines.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/instructor/06-data-pipelines.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

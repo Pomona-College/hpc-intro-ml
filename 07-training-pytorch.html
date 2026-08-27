@@ -367,7 +367,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Training with PyTorch</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/07-training-pytorch.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -386,7 +386,7 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How do you set up PyTorch for GPU training on Sagehen?</li>
+<ul><li>How do you set up PyTorch for GPU training on Sagehen HPC?</li>
 <li>What does an efficient training loop look like?</li>
 <li>How do you handle GPU memory errors?</li>
 <li>How do you choose between A100, L40S, and RTX PRO 6000 nodes for
@@ -435,7 +435,9 @@ oversubscribed, and tying one up for exploratory work makes everyone
 else wait. For final long runs at scale, request A100 with
 <code>--gres=gpu:a100:1</code> in your SLURM script and budget for queue
 time.</p>
-</section><section><h2 class="section-heading" id="gpu-memory-anatomy">GPU Memory Anatomy<a class="anchor" aria-label="anchor" href="#gpu-memory-anatomy"></a></h2>
+<figure><img src="fig/05-memory-management.png" alt="Five responses to a CUDA out of memory error, in order. First halve the batch size, the first thing to try and usually enough. Second use gradient accumulation for the same effective batch with less memory at once. Third use mixed precision in bfloat16 for roughly half the memory at little accuracy cost. Fourth use gradient checkpointing, trading compute for memory. Fifth ask for a bigger card, an A100 80 GB or RTX PRO 6000 96 GB." class="figure mx-auto d-block"><div class="figcaption">Work down the list; each step buys memory at a
+different cost.</div>
+</figure></section><section><h2 class="section-heading" id="gpu-memory-anatomy">GPU Memory Anatomy<a class="anchor" aria-label="anchor" href="#gpu-memory-anatomy"></a></h2>
 <hr class="half-width"><p>Before writing the training loop, understand where memory goes. CUDA
 out-of-memory errors are the single most common failure mode for ML jobs
 on HPC, and they almost always come from misjudging this breakdown:</p>
@@ -865,8 +867,8 @@ tight</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/07-training-pytorch.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/07-training-pytorch.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

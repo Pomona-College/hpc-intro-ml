@@ -423,20 +423,35 @@
         <h1>All Images</h1>
         
 <section id="01-why-ml-on-hpc"><h2 class="section-heading"><a href="01-why-ml-on-hpc.html">Why Machine Learning on HPC?</a></h2>
-<hr class="half-width"></section><section id="02-ml-workflow-overview"><h2 class="section-heading"><a href="02-ml-workflow-overview.html">ML Workflow Overview</a></h2>
-<hr class="half-width"></section><section id="03-environment-setup"><h2 class="section-heading"><a href="03-environment-setup.html">Setting Up Your ML Environment</a></h2>
+<hr class="half-width">
+<h3 id="01-why-ml-on-hpc-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A machine learning workflow: collect and clean data, feature engineering, choose a model, train on GPU, evaluate, and then iterate back to feature engineering, where most of the work happens. A note observes that only the training box needs a GPU and the rest runs on the amd partition, usually taking longer.’</p>
+<figure><img src="fig/01-ml-workflow.png" alt="A machine learning workflow: collect and clean data, feature engineering, choose a model, train on GPU, evaluate, and then iterate back to feature engineering, where most of the work happens. A note observes that only the training box needs a GPU and the rest runs on the amd partition, usually taking longer." class="figure mx-auto d-block"><div class="figcaption">Only one stage of the workflow actually needs a
+GPU.</div>
+</figure><hr></section><section id="02-ml-workflow-overview"><h2 class="section-heading"><a href="02-ml-workflow-overview.html">ML Workflow Overview</a></h2>
+<hr class="half-width">
+<h3 id="02-ml-workflow-overview-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing.’</p>
+<figure><img src="fig/02-when-hpc.png" alt="Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing." class="figure mx-auto d-block"><div class="figcaption">Size the problem before assuming you need the
+cluster.</div>
+</figure><hr></section><section id="03-environment-setup"><h2 class="section-heading"><a href="03-environment-setup.html">Setting Up Your ML Environment</a></h2>
 <hr class="half-width">
 <h3 id="03-environment-setup-figure-1">Figure 1</h3>
-<p aria-hidden="true">Image 1 of 1: ‘Terminal on Sagehen inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes.’</p>
-<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
-<code>ml_env</code> environment.</div>
+<p aria-hidden="true">Image 1 of 1: ‘Five phases and where each belongs: prototype on your laptop, preprocess on the amd partition, train on the gpu partition, evaluate on the amd partition, then publish results. A note warns that preprocessing on a GPU node wastes the card while it sits idle waiting for input and output.’</p>
+<figure><img src="fig/03-ml-phases.png" alt="Five phases and where each belongs: prototype on your laptop, preprocess on the amd partition, train on the gpu partition, evaluate on the amd partition, then publish results. A note warns that preprocessing on a GPU node wastes the card while it sits idle waiting for input and output." class="figure mx-auto d-block"><div class="figcaption">Each phase belongs on a different
+partition.</div>
 </figure><hr>
 <h3 id="03-environment-setup-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Terminal on Sagehen HPC inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes.’</p>
+<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen HPC inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
+<code>ml_env</code> environment.</div>
+</figure><hr>
+<h3 id="03-environment-setup-figure-3">Figure 3</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Terminal output of du -sh over the conda envs directory, sorted by size: a 28 megabyte myproject environment, a 62 megabyte tb_test environment, and a 7.0 gigabyte ml_env environment. Below, conda config --add envs_dirs adds a /bigdata path, and conda config --show envs_dirs lists the new /bigdata location ahead of the default /rhome and system miniconda3 directories.’</p>
 <figure><img src="fig/03-conda-env-storage.png" alt="Terminal output of du -sh over the conda envs directory, sorted by size: a 28 megabyte myproject environment, a 62 megabyte tb_test environment, and a 7.0 gigabyte ml_env environment. Below, conda config --add envs_dirs adds a /bigdata path, and conda config --show envs_dirs lists the new /bigdata location ahead of the default /rhome and system miniconda3 directories." class="figure mx-auto d-block"><div class="figcaption">Checking environment sizes, then redirecting
 conda to <code>/bigdata</code>.</div>
 </figure><hr>
-<h3 id="03-environment-setup-figure-3">Figure 3</h3>
+<h3 id="03-environment-setup-figure-4">Figure 4</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Terminal running the challenge solution as a Python heredoc. It prints the PyTorch version 2.5.1, the GPU count, the GPU name and memory, then performs a matrix multiplication on the CUDA device and reports that the GPU test passed with the resulting tensor shape.’</p>
 <figure><img src="fig/03-challenge-gpu-test.png" alt="Terminal running the challenge solution as a Python heredoc. It prints the PyTorch version 2.5.1, the GPU count, the GPU name and memory, then performs a matrix multiplication on the CUDA device and reports that the GPU test passed with the resulting tensor shape." class="figure mx-auto d-block"><div class="figcaption">The challenge solution running on a GPU
 node.</div>
@@ -458,10 +473,25 @@ with <code>nvidia-smi</code>.</div>
 <figure><img src="fig/05-pandas-dtypes-missing.png" alt="Terminal running a Python heredoc that builds a small pandas DataFrame with sensor_id and temperature columns containing deliberate None values, writes it to CSV, reads it back with explicit Int32 and float32 dtypes, then prints the DataFrame shape, its memory usage in megabytes, and a count of one missing value in each of the two columns." class="figure mx-auto d-block"><div class="figcaption">Setting dtypes on load and counting missing
 values, on a small worked example.</div>
 </figure><hr></section><section id="06-data-pipelines"><h2 class="section-heading"><a href="06-data-pipelines.html">Data Pipelines for HPC</a></h2>
-<hr class="half-width"></section><section id="07-training-pytorch"><h2 class="section-heading"><a href="07-training-pytorch.html">Training with PyTorch</a></h2>
-<hr class="half-width"></section><section id="08-training-tensorflow"><h2 class="section-heading"><a href="08-training-tensorflow.html">Training with TensorFlow</a></h2>
+<hr class="half-width">
+<h3 id="06-data-pipelines-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times.’</p>
+<figure><img src="fig/06-distributed-training.png" alt="Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times." class="figure mx-auto d-block"><div class="figcaption">Every GPU holds the whole model; only the data
+is split.</div>
+</figure><hr></section><section id="07-training-pytorch"><h2 class="section-heading"><a href="07-training-pytorch.html">Training with PyTorch</a></h2>
+<hr class="half-width">
+<h3 id="07-training-pytorch-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Five responses to a CUDA out of memory error, in order. First halve the batch size, the first thing to try and usually enough. Second use gradient accumulation for the same effective batch with less memory at once. Third use mixed precision in bfloat16 for roughly half the memory at little accuracy cost. Fourth use gradient checkpointing, trading compute for memory. Fifth ask for a bigger card, an A100 80 GB or RTX PRO 6000 96 GB.’</p>
+<figure><img src="fig/05-memory-management.png" alt="Five responses to a CUDA out of memory error, in order. First halve the batch size, the first thing to try and usually enough. Second use gradient accumulation for the same effective batch with less memory at once. Third use mixed precision in bfloat16 for roughly half the memory at little accuracy cost. Fourth use gradient checkpointing, trading compute for memory. Fifth ask for a bigger card, an A100 80 GB or RTX PRO 6000 96 GB." class="figure mx-auto d-block"><div class="figcaption">Work down the list; each step buys memory at a
+different cost.</div>
+</figure><hr></section><section id="08-training-tensorflow"><h2 class="section-heading"><a href="08-training-tensorflow.html">Training with TensorFlow</a></h2>
 <hr class="half-width"></section><section id="09-checkpointing"><h2 class="section-heading"><a href="09-checkpointing.html">Checkpointing Long Jobs</a></h2>
-<hr class="half-width"></section><section id="10-slurm-scripts-ml"><h2 class="section-heading"><a href="10-slurm-scripts-ml.html">SLURM Scripts for ML</a></h2>
+<hr class="half-width">
+<h3 id="09-checkpointing-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate.’</p>
+<figure><img src="fig/04-checkpointing.png" alt="A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate." class="figure mx-auto d-block"><div class="figcaption">Save to /bigdata — /scratch disappears with the
+job.</div>
+</figure><hr></section><section id="10-slurm-scripts-ml"><h2 class="section-heading"><a href="10-slurm-scripts-ml.html">SLURM Scripts for ML</a></h2>
 <hr class="half-width">
 <h3 id="10-slurm-scripts-ml-figure-1">Figure 1</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Terminal showing sbatch submitting train_job.sh as batch job 38943, followed by squeue long-format output. The pytorch job runs on the gpu partition in RUNNING state, a few seconds into its limit, on one node named gpu001.’</p>
@@ -519,8 +549,8 @@ values, on a small worked example.</div>
   "url": "https://pomona-college.github.io/hpc-intro-ml/images.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/images.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-26",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

@@ -218,10 +218,10 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#why-environment-setup-is-the-first-real-hurdle">Why Environment Setup Is the First Real Hurdle</a></li>
-<li><a href="#understanding-sagehens-module-system">Understanding Sagehen’s Module System</a></li>
+<li><a href="#understanding-sagehen-hpcs-module-system">Understanding Sagehen HPC’s Module System</a></li>
 <li><a href="#quick-start-getting-a-framework-running">Quick Start: Getting a Framework Running</a></li>
 <li><a href="#when-to-reuse-an-environment-vs.-build-your-own">When to Reuse an Environment vs. Build Your Own</a></li>
-<li><a href="#where-conda-lives-on-sagehen">Where Conda Lives on Sagehen</a></li>
+<li><a href="#where-conda-lives-on-sagehen-hpc">Where Conda Lives on Sagehen HPC</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -367,7 +367,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Setting Up Your ML Environment</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/03-environment-setup.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -386,7 +386,7 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How do you load ML modules on Sagehen?</li>
+<ul><li>How do you load ML modules on Sagehen HPC?</li>
 <li>What pre-built modules are available for PyTorch and
 TensorFlow?</li>
 <li>How do you verify GPU access is working?</li>
@@ -423,7 +423,9 @@ environment. So the real choice is between reusing an environment
 someone in your lab already built and building your own. Start by
 reusing one to confirm the GPU path works end to end, then build your
 own once you need specific versions or extra packages.</p>
-</section><section><h2 class="section-heading" id="understanding-sagehens-module-system">Understanding Sagehen’s Module System<a class="anchor" aria-label="anchor" href="#understanding-sagehens-module-system"></a></h2>
+<figure><img src="fig/03-ml-phases.png" alt="Five phases and where each belongs: prototype on your laptop, preprocess on the amd partition, train on the gpu partition, evaluate on the amd partition, then publish results. A note warns that preprocessing on a GPU node wastes the card while it sits idle waiting for input and output." class="figure mx-auto d-block"><div class="figcaption">Each phase belongs on a different
+partition.</div>
+</figure></section><section><h2 class="section-heading" id="understanding-sagehen-hpcs-module-system">Understanding Sagehen HPC’s Module System<a class="anchor" aria-label="anchor" href="#understanding-sagehen-hpcs-module-system"></a></h2>
 <hr class="half-width"><p>Sagehen uses Lmod (a module system) to manage software versions.
 Modules provide pre-configured environments without cluttering your
 shell. Each module sets <code>PATH</code>, <code>LD_LIBRARY_PATH</code>,
@@ -567,7 +569,7 @@ have been created as described in the next episode.</p>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1" aria-label="code-block-6-19"></a>    z <span class="op">=</span> torch.matmul(x, y)</span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1" aria-label="code-block-6-20"></a>    <span class="bu">print</span>(<span class="ss">f"GPU computation test: PASSED (result shape: </span><span class="sc">{</span>z<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre>
 </div>
-<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
+<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen HPC inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
 <code>ml_env</code> environment.</div>
 </figure><p>The GPU name in the output tells you which Sagehen GPU you got.
 Sagehen has a heterogeneous GPU pool of 10 GPUs total (confirmed May
@@ -604,7 +606,7 @@ is broken.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="where-conda-lives-on-sagehen">Where Conda Lives on Sagehen<a class="anchor" aria-label="anchor" href="#where-conda-lives-on-sagehen"></a></h2>
+</section><section><h2 class="section-heading" id="where-conda-lives-on-sagehen-hpc">Where Conda Lives on Sagehen HPC<a class="anchor" aria-label="anchor" href="#where-conda-lives-on-sagehen-hpc"></a></h2>
 <hr class="half-width"><p>When you run <code>conda create -n myenv ...</code>, the environment
 is stored under <code>/rhome/$USER/.conda/envs/myenv</code>. Each
 environment with a deep learning framework can easily reach 5 to 10 GB.
@@ -738,7 +740,9 @@ to start</li>
 (CUDA version, dependencies)</li>
 <li>Always re-load modules inside SLURM scripts; the login-node
 environment does not transfer</li>
-<li>CUDA 12.1 is the system version on Sagehen</li>
+<li>Sagehen’s GPU driver reports CUDA 12.7; the newest CUDA
+<em>toolkit</em> module is <code>cuda/12.2.1</code>. They are different
+things and do not need to match</li>
 <li>Always test GPU access with small verification scripts before large
 jobs</li>
 <li>Roll your own conda environment when you need pinned versions or
@@ -809,8 +813,8 @@ tight</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/03-environment-setup.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/03-environment-setup.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

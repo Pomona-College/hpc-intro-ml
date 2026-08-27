@@ -366,7 +366,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Checkpointing Long Jobs</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/09-checkpointing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -387,7 +387,7 @@
 <h3 class="card-title">Questions</h3>
 <ul><li>How do you save and resume long-running training jobs?</li>
 <li>What should a complete checkpoint include?</li>
-<li>How do you implement multi-GPU training on Sagehen?</li>
+<li>How do you implement multi-GPU training on Sagehen HPC?</li>
 <li>How often should you checkpoint, and where should checkpoints
 live?</li>
 </ul></div>
@@ -417,7 +417,9 @@ good state.</p>
 hyperparameter sweeps that need to fork from a common pretrained state,
 and analysis runs that need to inspect a model at multiple points in
 training to understand its learning dynamics.</p>
-</section><section><h2 class="section-heading" id="what-goes-in-a-checkpoint">What Goes In a Checkpoint<a class="anchor" aria-label="anchor" href="#what-goes-in-a-checkpoint"></a></h2>
+<figure><img src="fig/04-checkpointing.png" alt="A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate." class="figure mx-auto d-block"><div class="figcaption">Save to /bigdata — /scratch disappears with the
+job.</div>
+</figure></section><section><h2 class="section-heading" id="what-goes-in-a-checkpoint">What Goes In a Checkpoint<a class="anchor" aria-label="anchor" href="#what-goes-in-a-checkpoint"></a></h2>
 <hr class="half-width"><p>A complete checkpoint must contain enough state to resume training
 without changing the result. At minimum:</p>
 <ul><li>Model weights (<code>model.state_dict()</code>)</li>
@@ -512,8 +514,8 @@ instead.</p>
 condition.</p>
 <p>For the largest models where each checkpoint is many GB, save to
 <code>/scratch</code> during the run and only move the final or best to
-<code>/bigdata</code>. Hammering NFS with frequent multi-GB writes is
-rude.</p>
+<code>/bigdata</code>. Hammering the shared BeeGFS filesystem with
+frequent multi-GB writes slows the cluster down for everyone.</p>
 </div>
 </div>
 </div>
@@ -612,13 +614,13 @@ checkpoint to disk simultaneously.</p>
 with much less boilerplate. The <code>with strategy.scope()</code> block
 must wrap model creation and compilation; <code>fit</code> then
 automatically splits batches and averages gradients.</p>
-<div id="multi-gpu-on-sagehen-when-is-it-worth-it" class="callout">
+<div id="multi-gpu-on-sagehen-hpc-when-is-it-worth-it" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="multi-gpu-on-sagehen-when-is-it-worth-it" class="callout-inner">
-<h3 class="callout-title">Multi-GPU on Sagehen: when is it worth
+<div id="multi-gpu-on-sagehen-hpc-when-is-it-worth-it" class="callout-inner">
+<h3 class="callout-title">Multi-GPU on Sagehen HPC: when is it worth
 it?</h3>
 <div class="callout-content">
 <p>Sagehen GPU nodes typically host 2 GPUs. Going from 1 to 2 GPUs gives
@@ -857,8 +859,8 @@ speedup with no complexity</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/09-checkpointing.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/09-checkpointing.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

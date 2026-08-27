@@ -460,7 +460,9 @@ to start</li>
 (CUDA version, dependencies)</li>
 <li>Always re-load modules inside SLURM scripts; the login-node
 environment does not transfer</li>
-<li>CUDA 12.1 is the system version on Sagehen</li>
+<li>Sagehen’s GPU driver reports CUDA 12.7; the newest CUDA
+<em>toolkit</em> module is <code>cuda/12.2.1</code>. They are different
+things and do not need to match</li>
 <li>Always test GPU access with small verification scripts before large
 jobs</li>
 <li>Roll your own conda environment when you need pinned versions or
@@ -660,8 +662,8 @@ figure 3?”</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/instructor/key-points.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/instructor/key-points.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-26",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

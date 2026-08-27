@@ -263,7 +263,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#tensorflow-vs-pytorch-which-to-choose">TensorFlow vs PyTorch: Which to Choose</a></li>
-<li><a href="#setting-up-tensorflow-on-sagehen">Setting Up TensorFlow on Sagehen</a></li>
+<li><a href="#setting-up-tensorflow-on-sagehen-hpc">Setting Up TensorFlow on Sagehen HPC</a></li>
 <li><a href="#keras-high-level-api">Keras High-Level API</a></li>
 <li><a href="#efficient-data-loading-with-tf.data">Efficient Data Loading with tf.data</a></li>
 <li><a href="#transfer-learning-with-pre-trained-models">Transfer Learning with Pre-trained Models</a></li>
@@ -368,7 +368,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Training with TensorFlow</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/08-training-tensorflow.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -389,7 +389,7 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How do you set up TensorFlow for GPU training on Sagehen?</li>
+<ul><li>How do you set up TensorFlow for GPU training on Sagehen HPC?</li>
 <li>What are the differences between PyTorch and TensorFlow
 workflows?</li>
 <li>How do you use Keras for rapid model development?</li>
@@ -429,7 +429,7 @@ PyTorch. If your collaborators or advisor use TensorFlow, or your
 downstream pipeline needs TFLite or TF Serving, TensorFlow is the right
 call. Otherwise default to PyTorch and revisit only if there is a
 specific reason.</p>
-</section><section><h2 class="section-heading" id="setting-up-tensorflow-on-sagehen">Setting Up TensorFlow on Sagehen<a class="anchor" aria-label="anchor" href="#setting-up-tensorflow-on-sagehen"></a></h2>
+</section><section><h2 class="section-heading" id="setting-up-tensorflow-on-sagehen-hpc">Setting Up TensorFlow on Sagehen HPC<a class="anchor" aria-label="anchor" href="#setting-up-tensorflow-on-sagehen-hpc"></a></h2>
 <hr class="half-width"><p>The cluster has a system module for TensorFlow, but creating your own
 conda environment is usually safer because version pinning is in your
 control:</p>
@@ -696,7 +696,7 @@ ResNet50, and train for 5 epochs with GPU memory growth enabled.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -760,7 +760,7 @@ transformer variant whose code only ships in PyTorch.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>A. PyTorch. The HuggingFace Transformers library is PyTorch-first;
 nearly all BERT fine-tuning tutorials and pretrained checkpoints are
@@ -860,8 +860,8 @@ sub-linear</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/instructor/08-training-tensorflow.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/instructor/08-training-tensorflow.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

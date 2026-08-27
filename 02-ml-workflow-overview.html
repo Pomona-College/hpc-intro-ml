@@ -209,8 +209,8 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#cpu-vs-gpu-when-to-use-each">CPU vs GPU: When to Use Each</a></li>
-<li><a href="#sagehen-ml-infrastructure">Sagehen ML Infrastructure</a></li>
-<li><a href="#typical-ml-workflow-on-sagehen">Typical ML Workflow on Sagehen</a></li>
+<li><a href="#sagehen-hpc-ml-infrastructure">Sagehen HPC ML Infrastructure</a></li>
+<li><a href="#typical-ml-workflow-on-sagehen-hpc">Typical ML Workflow on Sagehen HPC</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -365,7 +365,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>ML Workflow Overview</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/02-ml-workflow-overview.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -385,7 +385,7 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul><li>How do CPUs and GPUs compare for different ML workloads?</li>
-<li>What GPU options are available on Sagehen?</li>
+<li>What GPU options are available on Sagehen HPC?</li>
 <li>What does a typical ML workflow on HPC look like?</li>
 </ul></div>
 </div>
@@ -427,7 +427,7 @@ operations</li>
 Any framework with CUDA support (PyTorch, TensorFlow)</p>
 </div>
 <div class="section level3">
-<h3 id="sagehens-gpu-options">Sagehen’s GPU Options<a class="anchor" aria-label="anchor" href="#sagehens-gpu-options"></a></h3>
+<h3 id="sagehen-hpcs-gpu-options">Sagehen HPC’s GPU Options<a class="anchor" aria-label="anchor" href="#sagehen-hpcs-gpu-options"></a></h3>
 <pre><code>GPU Type      VRAM       Best For                         Units
 ────────────────────────────────────────────────────────────────
 A100 (80GB)   80 GB      Large models, distributed        4
@@ -464,8 +464,10 @@ Total: 10 GPUs (confirmed by Andrew Wilson, May 2026)</code></pre>
 <td>1.0x</td>
 </tr></tbody></table><p><strong>Key insight</strong>: GPUs excel at deep learning but don’t
 help with data I/O or tree-based models.</p>
-</div>
-</section><section><h2 class="section-heading" id="sagehen-ml-infrastructure">Sagehen ML Infrastructure<a class="anchor" aria-label="anchor" href="#sagehen-ml-infrastructure"></a></h2>
+<figure><img src="fig/02-when-hpc.png" alt="Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing." class="figure mx-auto d-block"><div class="figcaption">Size the problem before assuming you need the
+cluster.</div>
+</figure></div>
+</section><section><h2 class="section-heading" id="sagehen-hpc-ml-infrastructure">Sagehen HPC ML Infrastructure<a class="anchor" aria-label="anchor" href="#sagehen-hpc-ml-infrastructure"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="storage-architecture">Storage Architecture<a class="anchor" aria-label="anchor" href="#storage-architecture"></a></h3>
 <div class="codewrapper sourceCode" id="cb2">
@@ -505,7 +507,7 @@ shorter max walltime (check <code>sinfo -p short</code>)</li>
 <strong>OnDemand web interface</strong>: Interactive Jupyter
 notebooks with optional GPU</li>
 </ul></div>
-</section><section><h2 class="section-heading" id="typical-ml-workflow-on-sagehen">Typical ML Workflow on Sagehen<a class="anchor" aria-label="anchor" href="#typical-ml-workflow-on-sagehen"></a></h2>
+</section><section><h2 class="section-heading" id="typical-ml-workflow-on-sagehen-hpc">Typical ML Workflow on Sagehen HPC<a class="anchor" aria-label="anchor" href="#typical-ml-workflow-on-sagehen-hpc"></a></h2>
 <hr class="half-width"><pre><code>PHASE 1: Local Development (Laptop)
 ├─ Write model code, test on toy dataset, debug
 
@@ -643,8 +645,8 @@ everything on GPU</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/02-ml-workflow-overview.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/02-ml-workflow-overview.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

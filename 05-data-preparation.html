@@ -236,7 +236,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#the-data-preparation-bottleneck">The Data Preparation Bottleneck</a></li>
-<li><a href="#data-placement-strategy-on-sagehen">Data Placement Strategy on Sagehen</a></li>
+<li><a href="#data-placement-strategy-on-sagehen-hpc">Data Placement Strategy on Sagehen HPC</a></li>
 <li><a href="#preprocessing-with-pandas">Preprocessing with pandas</a></li>
 <li><a href="#common-data-pitfalls">Common Data Pitfalls</a></li>
 <li><a href="#when-to-move-beyond-pandas">When to Move Beyond pandas</a></li>
@@ -367,7 +367,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Preparation Basics</h1>
-        <p>Last updated on 2026-08-24 |
+        <p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/05-data-preparation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -398,7 +398,7 @@ and encoding?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Understand data layout and I/O optimization on Sagehen</li>
+<ul><li>Understand data layout and I/O optimization on Sagehen HPC</li>
 <li>Handle missing values, normalize features, and encode categorical
 variables</li>
 <li>Avoid data leakage and class imbalance pitfalls</li>
@@ -425,7 +425,7 @@ in deployment. A model trained on imbalanced classes optimizes the
 majority class and ignores the minority class entirely. A model with the
 wrong feature scaling never converges. Each of these is fixable in 20
 lines of preprocessing code, but only if you know to look.</p>
-</section><section><h2 class="section-heading" id="data-placement-strategy-on-sagehen">Data Placement Strategy on Sagehen<a class="anchor" aria-label="anchor" href="#data-placement-strategy-on-sagehen"></a></h2>
+</section><section><h2 class="section-heading" id="data-placement-strategy-on-sagehen-hpc">Data Placement Strategy on Sagehen HPC<a class="anchor" aria-label="anchor" href="#data-placement-strategy-on-sagehen-hpc"></a></h2>
 <hr class="half-width"><p>For ML workflows on GPU nodes:</p>
 <pre><code>1. Store original data in /bigdata (persistent, accessible to all)
 2. Copy training data subset to /scratch at job start (fast SSD access)
@@ -795,8 +795,8 @@ and encoding choice</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/05-data-preparation.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/05-data-preparation.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-24",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>

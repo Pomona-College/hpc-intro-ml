@@ -424,7 +424,7 @@
         
 <section id="aio-01-why-ml-on-hpc"><p>Content from <a href="01-why-ml-on-hpc.html">Why Machine Learning on HPC?</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/01-why-ml-on-hpc.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -473,7 +473,9 @@ processing</li>
 </ul>
 <p>These bottlenecks are not performance annoyances; they’re project
 stoppers. This is where HPC becomes essential.</p>
-</section><section><h2 class="section-heading" id="when-hpc-is-necessary">When HPC is Necessary<a class="anchor" aria-label="anchor" href="#when-hpc-is-necessary"></a>
+<figure><img src="fig/01-ml-workflow.png" alt="A machine learning workflow: collect and clean data, feature engineering, choose a model, train on GPU, evaluate, and then iterate back to feature engineering, where most of the work happens. A note observes that only the training box needs a GPU and the rest runs on the amd partition, usually taking longer." class="figure mx-auto d-block"><div class="figcaption">Only one stage of the workflow actually needs a
+GPU.</div>
+</figure></section><section><h2 class="section-heading" id="when-hpc-is-necessary">When HPC is Necessary<a class="anchor" aria-label="anchor" href="#when-hpc-is-necessary"></a>
 </h2>
 <hr class="half-width">
 <div class="section level3">
@@ -499,7 +501,7 @@ processing mandatory</li>
 </ul>
 <p><strong>Example</strong>: Image classification with ImageNet (150 GB)
 - Laptop: Weeks of training (slow disk I/O, CPU bottleneck) - Sagehen
-GPU: 1-3 days (parallel I/O, GPU acceleration)</p>
+HPC GPU: 1-3 days (parallel I/O, GPU acceleration)</p>
 </div>
 <div class="section level3">
 <h3 id="scenario-2-long-training-times">Scenario 2: Long Training Times<a class="anchor" aria-label="anchor" href="#scenario-2-long-training-times"></a>
@@ -586,7 +588,7 @@ nodes?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p><strong>Project A</strong>: YES, use HPC GPU. 8 hours on CPU becomes
 ~30 minutes on A100. Fine-tuning benefits from CUDA.</p>
@@ -622,7 +624,7 @@ setup time</li>
 <!-- Reference links for workshop episodes -->
 </section></section><section id="aio-02-ml-workflow-overview"><p>Content from <a href="02-ml-workflow-overview.html">ML Workflow Overview</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/02-ml-workflow-overview.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -637,7 +639,7 @@ setup time</li>
 <h3 class="card-title">Questions</h3>
 <ul>
 <li>How do CPUs and GPUs compare for different ML workloads?</li>
-<li>What GPU options are available on Sagehen?</li>
+<li>What GPU options are available on Sagehen HPC?</li>
 <li>What does a typical ML workflow on HPC look like?</li>
 </ul>
 </div>
@@ -690,7 +692,7 @@ operations</li>
 Any framework with CUDA support (PyTorch, TensorFlow)</p>
 </div>
 <div class="section level3">
-<h3 id="sagehens-gpu-options">Sagehen’s GPU Options<a class="anchor" aria-label="anchor" href="#sagehens-gpu-options"></a>
+<h3 id="sagehen-hpcs-gpu-options">Sagehen HPC’s GPU Options<a class="anchor" aria-label="anchor" href="#sagehen-hpcs-gpu-options"></a>
 </h3>
 <pre><code>GPU Type      VRAM       Best For                         Units
 ────────────────────────────────────────────────────────────────
@@ -743,8 +745,11 @@ Total: 10 GPUs (confirmed by Andrew Wilson, May 2026)</code></pre>
 </table>
 <p><strong>Key insight</strong>: GPUs excel at deep learning but don’t
 help with data I/O or tree-based models.</p>
+<figure><img src="fig/02-when-hpc.png" alt="Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing." class="figure mx-auto d-block"><div class="figcaption">Size the problem before assuming you need the
+cluster.</div>
+</figure>
 </div>
-</section><section><h2 class="section-heading" id="sagehen-ml-infrastructure">Sagehen ML Infrastructure<a class="anchor" aria-label="anchor" href="#sagehen-ml-infrastructure"></a>
+</section><section><h2 class="section-heading" id="sagehen-hpc-ml-infrastructure">Sagehen HPC ML Infrastructure<a class="anchor" aria-label="anchor" href="#sagehen-hpc-ml-infrastructure"></a>
 </h2>
 <hr class="half-width">
 <div class="section level3">
@@ -790,7 +795,7 @@ shorter max walltime (check <code>sinfo -p short</code>)</li>
 notebooks with optional GPU</li>
 </ul>
 </div>
-</section><section><h2 class="section-heading" id="typical-ml-workflow-on-sagehen">Typical ML Workflow on Sagehen<a class="anchor" aria-label="anchor" href="#typical-ml-workflow-on-sagehen"></a>
+</section><section><h2 class="section-heading" id="typical-ml-workflow-on-sagehen-hpc">Typical ML Workflow on Sagehen HPC<a class="anchor" aria-label="anchor" href="#typical-ml-workflow-on-sagehen-hpc"></a>
 </h2>
 <hr class="half-width">
 <pre><code>PHASE 1: Local Development (Laptop)
@@ -876,7 +881,7 @@ everything on GPU</li>
 <!-- Reference links for workshop episodes -->
 </section></section><section id="aio-03-environment-setup"><p>Content from <a href="03-environment-setup.html">Setting Up Your ML Environment</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/03-environment-setup.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -890,7 +895,7 @@ everything on GPU</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How do you load ML modules on Sagehen?</li>
+<li>How do you load ML modules on Sagehen HPC?</li>
 <li>What pre-built modules are available for PyTorch and
 TensorFlow?</li>
 <li>How do you verify GPU access is working?</li>
@@ -932,7 +937,9 @@ environment. So the real choice is between reusing an environment
 someone in your lab already built and building your own. Start by
 reusing one to confirm the GPU path works end to end, then build your
 own once you need specific versions or extra packages.</p>
-</section><section><h2 class="section-heading" id="understanding-sagehens-module-system">Understanding Sagehen’s Module System<a class="anchor" aria-label="anchor" href="#understanding-sagehens-module-system"></a>
+<figure><img src="fig/03-ml-phases.png" alt="Five phases and where each belongs: prototype on your laptop, preprocess on the amd partition, train on the gpu partition, evaluate on the amd partition, then publish results. A note warns that preprocessing on a GPU node wastes the card while it sits idle waiting for input and output." class="figure mx-auto d-block"><div class="figcaption">Each phase belongs on a different
+partition.</div>
+</figure></section><section><h2 class="section-heading" id="understanding-sagehen-hpcs-module-system">Understanding Sagehen HPC’s Module System<a class="anchor" aria-label="anchor" href="#understanding-sagehen-hpcs-module-system"></a>
 </h2>
 <hr class="half-width">
 <p>Sagehen uses Lmod (a module system) to manage software versions.
@@ -1085,7 +1092,7 @@ have been created as described in the next episode.</p>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1" aria-label="code-block-6-19"></a>    z <span class="op">=</span> torch.matmul(x, y)</span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1" aria-label="code-block-6-20"></a>    <span class="bu">print</span>(<span class="ss">f"GPU computation test: PASSED (result shape: </span><span class="sc">{</span>z<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre>
 </div>
-<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
+<figure><img src="fig/03-verify-pytorch-cuda.png" alt="Terminal on Sagehen HPC inside the ml_env conda environment. A heredoc runs a Python script that imports torch and prints the PyTorch version, whether CUDA is available, the CUDA version, and the number of GPUs, then loops over each GPU printing its name and total memory in gigabytes." class="figure mx-auto d-block"><div class="figcaption">Running the verification script inside the
 <code>ml_env</code> environment.</div>
 </figure><p>The GPU name in the output tells you which Sagehen GPU you got.
 Sagehen has a heterogeneous GPU pool of 10 GPUs total (confirmed May
@@ -1128,7 +1135,7 @@ is broken.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="where-conda-lives-on-sagehen">Where Conda Lives on Sagehen<a class="anchor" aria-label="anchor" href="#where-conda-lives-on-sagehen"></a>
+</section><section><h2 class="section-heading" id="where-conda-lives-on-sagehen-hpc">Where Conda Lives on Sagehen HPC<a class="anchor" aria-label="anchor" href="#where-conda-lives-on-sagehen-hpc"></a>
 </h2>
 <hr class="half-width">
 <p>When you run <code>conda create -n myenv ...</code>, the environment
@@ -1267,7 +1274,9 @@ to start</li>
 (CUDA version, dependencies)</li>
 <li>Always re-load modules inside SLURM scripts; the login-node
 environment does not transfer</li>
-<li>CUDA 12.1 is the system version on Sagehen</li>
+<li>Sagehen’s GPU driver reports CUDA 12.7; the newest CUDA
+<em>toolkit</em> module is <code>cuda/12.2.1</code>. They are different
+things and do not need to match</li>
 <li>Always test GPU access with small verification scripts before large
 jobs</li>
 <li>Roll your own conda environment when you need pinned versions or
@@ -1281,7 +1290,7 @@ tight</li>
 <!-- highlight <labname>/<myusername> placeholders in code blocks; remove if the varnish theme handles this natively -->
 <script>(function(){var CSS='.sh-placeholder{color:#c2410c;font-weight:700}[data-bs-theme="dark"] .sh-placeholder,html.dark .sh-placeholder{color:#fdba74}@media (prefers-color-scheme: dark){[data-bs-theme="auto"] .sh-placeholder{color:#fdba74}}';var RX=/<labname>|<myusername>/g;function firstMatch(el){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),nodes=[],full='';while(w.nextNode()){nodes.push({n:w.currentNode,s:full.length});full+=w.currentNode.nodeValue;}RX.lastIndex=0;var m;while((m=RX.exec(full))){var s=m.index,e=s+m[0].length,inSpan=false,parts=[];for(var j=0;j<nodes.length;j++){var ns=nodes[j].s,ne=ns+nodes[j].n.nodeValue.length;if(ne<=s||ns>=e)continue;parts.push({node:nodes[j].n,a:Math.max(s-ns,0),b:Math.min(e-ns,nodes[j].n.nodeValue.length)});var p=nodes[j].n.parentNode;while(p&&p!==el){if(p.classList&&p.classList.contains('sh-placeholder')){inSpan=true;break;}p=p.parentNode;}}if(!inSpan&&parts.length)return parts;}return null;}function wrapParts(parts){for(var i=parts.length-1;i>=0;i--){var t=parts[i].node,txt=t.nodeValue,a=parts[i].a,b=parts[i].b;var span=document.createElement('span');span.className='sh-placeholder';span.textContent=txt.slice(a,b);var f=document.createDocumentFragment();if(a>0)f.appendChild(document.createTextNode(txt.slice(0,a)));f.appendChild(span);if(b<txt.length)f.appendChild(document.createTextNode(txt.slice(b)));t.parentNode.replaceChild(f,t);}}function run(){var st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);document.querySelectorAll('pre,code').forEach(function(el){var guard=0,parts;while((parts=firstMatch(el))&&guard++<500){wrapParts(parts);}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}})();</script><!-- Reference links for workshop episodes --></section></section><section id="aio-04-loading-ml-frameworks"><p>Content from <a href="04-loading-ml-frameworks.html">Loading ML Frameworks</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/04-loading-ml-frameworks.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1327,7 +1336,7 @@ quota?</li>
 <hr class="half-width">
 <p>For rigorous environment management see Workshop 21 (Reproducible
 Research Pipelines).</p>
-<p>Sagehen has no pre-built <code>pytorch</code> or
+<p>Sagehen HPC has no pre-built <code>pytorch</code> or
 <code>tensorflow</code> module, so a conda environment is not an
 optional upgrade — it is the only way to get either framework running.
 Conda environments also give you full control: pin every version,
@@ -1578,10 +1587,10 @@ with <code>nvidia-smi</code>.</div>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="co"># Check CUDA version on system</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="ex">nvidia-smi</span>  <span class="co"># Should show CUDA 12.1</span></span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="co"># Driver's CUDA capability -- on Sagehen's GPU nodes this reports 12.7</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="ex">nvidia-smi</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a><span class="co"># Check PyTorch CUDA version</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a><span class="co"># What PyTorch was actually built against</span></span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a><span class="ex">python3</span> <span class="at">-c</span> <span class="st">"import torch; print(torch.version.cuda)"</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1" aria-label="code-block-10-6"></a></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1" aria-label="code-block-10-7"></a><span class="co"># If mismatch, specify correct version</span></span>
@@ -1592,6 +1601,59 @@ CUDA driver version. <code>nvidia-smi</code> reports the driver
 capability; <code>torch.version.cuda</code> reports what PyTorch was
 built against. As long as PyTorch’s CUDA is <code>&lt;=</code> the
 driver’s, things work.</p>
+<div id="three-different-cuda-versions-dont-confuse-them" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="three-different-cuda-versions-dont-confuse-them" class="callout-inner">
+<h3 class="callout-title">Three Different “CUDA Versions” — Don’t
+Confuse Them</h3>
+<div class="callout-content">
+<p>This trips people up constantly, because all three are called
+“CUDA”:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>What</th>
+<th>Where you see it</th>
+<th>On Sagehen</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>Driver</strong> capability</td>
+<td>
+<code>nvidia-smi</code>, top right</td>
+<td><strong>12.7</strong></td>
+</tr>
+<tr>
+<td>
+<strong>Toolkit</strong> module</td>
+<td><code>module avail cuda</code></td>
+<td>11.8.0, 12.0.0, <strong>12.2.1</strong> (default)</td>
+</tr>
+<tr>
+<td>What <strong>PyTorch</strong> was built against</td>
+<td><code>torch.version.cuda</code></td>
+<td>whatever <code>pytorch-cuda=</code> you installed</td>
+</tr>
+</tbody>
+</table>
+<p>The rule is only ever: <strong>PyTorch’s CUDA ≤ the driver’s
+CUDA.</strong> <code>pytorch-cuda=12.1</code> is fine against a 12.7
+driver, and it does not need to match the toolkit module number at all —
+conda ships its own CUDA runtime inside the environment.</p>
+<p>So a “CUDA version mismatch” almost never means “these numbers
+differ”. It means PyTorch was built for a <em>newer</em> CUDA than the
+driver supports.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="problem-4-rhome-quota-exceeded">Problem 4: “/rhome quota exceeded”<a class="anchor" aria-label="anchor" href="#problem-4-rhome-quota-exceeded"></a>
@@ -1608,7 +1670,7 @@ driver’s, things work.</p>
 </div>
 <p>Caches alone can be a few GB. <code>conda clean -a</code> is safe to
 run periodically.</p>
-<div id="callout2" class="callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -1709,7 +1771,7 @@ usually environment setup issues</li>
 </div>
 </section></section><section id="aio-05-data-preparation"><p>Content from <a href="05-data-preparation.html">Data Preparation Basics</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/05-data-preparation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1737,7 +1799,7 @@ and encoding?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Understand data layout and I/O optimization on Sagehen</li>
+<li>Understand data layout and I/O optimization on Sagehen HPC</li>
 <li>Handle missing values, normalize features, and encode categorical
 variables</li>
 <li>Avoid data leakage and class imbalance pitfalls</li>
@@ -1769,7 +1831,7 @@ in deployment. A model trained on imbalanced classes optimizes the
 majority class and ignores the minority class entirely. A model with the
 wrong feature scaling never converges. Each of these is fixable in 20
 lines of preprocessing code, but only if you know to look.</p>
-</section><section><h2 class="section-heading" id="data-placement-strategy-on-sagehen">Data Placement Strategy on Sagehen<a class="anchor" aria-label="anchor" href="#data-placement-strategy-on-sagehen"></a>
+</section><section><h2 class="section-heading" id="data-placement-strategy-on-sagehen-hpc">Data Placement Strategy on Sagehen HPC<a class="anchor" aria-label="anchor" href="#data-placement-strategy-on-sagehen-hpc"></a>
 </h2>
 <hr class="half-width">
 <p>For ML workflows on GPU nodes:</p>
@@ -2096,7 +2158,7 @@ and encoding choice</li>
 <!-- highlight <labname>/<myusername> placeholders in code blocks; remove if the varnish theme handles this natively -->
 <script>(function(){var CSS='.sh-placeholder{color:#c2410c;font-weight:700}[data-bs-theme="dark"] .sh-placeholder,html.dark .sh-placeholder{color:#fdba74}@media (prefers-color-scheme: dark){[data-bs-theme="auto"] .sh-placeholder{color:#fdba74}}';var RX=/<labname>|<myusername>/g;function firstMatch(el){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),nodes=[],full='';while(w.nextNode()){nodes.push({n:w.currentNode,s:full.length});full+=w.currentNode.nodeValue;}RX.lastIndex=0;var m;while((m=RX.exec(full))){var s=m.index,e=s+m[0].length,inSpan=false,parts=[];for(var j=0;j<nodes.length;j++){var ns=nodes[j].s,ne=ns+nodes[j].n.nodeValue.length;if(ne<=s||ns>=e)continue;parts.push({node:nodes[j].n,a:Math.max(s-ns,0),b:Math.min(e-ns,nodes[j].n.nodeValue.length)});var p=nodes[j].n.parentNode;while(p&&p!==el){if(p.classList&&p.classList.contains('sh-placeholder')){inSpan=true;break;}p=p.parentNode;}}if(!inSpan&&parts.length)return parts;}return null;}function wrapParts(parts){for(var i=parts.length-1;i>=0;i--){var t=parts[i].node,txt=t.nodeValue,a=parts[i].a,b=parts[i].b;var span=document.createElement('span');span.className='sh-placeholder';span.textContent=txt.slice(a,b);var f=document.createDocumentFragment();if(a>0)f.appendChild(document.createTextNode(txt.slice(0,a)));f.appendChild(span);if(b<txt.length)f.appendChild(document.createTextNode(txt.slice(b)));t.parentNode.replaceChild(f,t);}}function run(){var st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);document.querySelectorAll('pre,code').forEach(function(el){var guard=0,parts;while((parts=firstMatch(el))&&guard++<500){wrapParts(parts);}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}})();</script><!-- Reference links for workshop episodes --></section></section><section id="aio-06-data-pipelines"><p>Content from <a href="06-data-pipelines.html">Data Pipelines for HPC</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/06-data-pipelines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2137,12 +2199,13 @@ training?</li>
 <section><h2 class="section-heading" id="why-data-pipelines-matter-on-hpc">Why Data Pipelines Matter on HPC<a class="anchor" aria-label="anchor" href="#why-data-pipelines-matter-on-hpc"></a>
 </h2>
 <hr class="half-width">
-<p>A modern A100 80GB GPU on Sagehen can process roughly 5,000 to 20,000
-training images per second once data sits in GPU memory. Reading those
-same images from <code>/bigdata</code> (parallel NFS, ~200 MB/s) into
-RAM, decoding them, and copying them to the device can take ten times
-longer than the forward and backward pass. The result is a $20,000 GPU
-sitting at 5% utilization while you wait for disk.</p>
+<p>A modern A100 80GB GPU on Sagehen HPC can process roughly 5,000 to
+20,000 training images per second once data sits in GPU memory. Reading
+those same images from <code>/bigdata</code> (BeeGFS, a shared parallel
+filesystem, ~200 MB/s for this kind of many-small-file access) into RAM,
+decoding them, and copying them to the device can take ten times longer
+than the forward and backward pass. The result is a $20,000 GPU sitting
+at 5% utilization while you wait for disk.</p>
 <p>A good data pipeline does three things at once. It moves data from
 persistent storage onto fast scratch storage. It transforms raw inputs
 into model-ready tensors using as many CPU cores as the node provides.
@@ -2154,7 +2217,9 @@ job spends most of its allocated time waiting on I/O.</p>
 First, large-scale preprocessing with Dask, run as a CPU-only batch job
 before training. Second, the per-batch loading machinery that PyTorch
 and TensorFlow use during training itself.</p>
-</section><section><h2 class="section-heading" id="large-scale-preprocessing-with-dask">Large-Scale Preprocessing with Dask<a class="anchor" aria-label="anchor" href="#large-scale-preprocessing-with-dask"></a>
+<figure><img src="fig/06-distributed-training.png" alt="Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times." class="figure mx-auto d-block"><div class="figcaption">Every GPU holds the whole model; only the data
+is split.</div>
+</figure></section><section><h2 class="section-heading" id="large-scale-preprocessing-with-dask">Large-Scale Preprocessing with Dask<a class="anchor" aria-label="anchor" href="#large-scale-preprocessing-with-dask"></a>
 </h2>
 <hr class="half-width">
 <p>When the raw dataset is larger than a single node’s 512 GB of RAM, or
@@ -2491,7 +2556,7 @@ go for that later job to find it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2558,7 +2623,7 @@ predict the effect of each.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>Stage the JPEG directory to <code>/scratch</code> at job start.
@@ -2608,7 +2673,7 @@ a model problem</li>
 <!-- highlight <labname>/<myusername> placeholders in code blocks; remove if the varnish theme handles this natively -->
 <script>(function(){var CSS='.sh-placeholder{color:#c2410c;font-weight:700}[data-bs-theme="dark"] .sh-placeholder,html.dark .sh-placeholder{color:#fdba74}@media (prefers-color-scheme: dark){[data-bs-theme="auto"] .sh-placeholder{color:#fdba74}}';var RX=/<labname>|<myusername>/g;function firstMatch(el){var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),nodes=[],full='';while(w.nextNode()){nodes.push({n:w.currentNode,s:full.length});full+=w.currentNode.nodeValue;}RX.lastIndex=0;var m;while((m=RX.exec(full))){var s=m.index,e=s+m[0].length,inSpan=false,parts=[];for(var j=0;j<nodes.length;j++){var ns=nodes[j].s,ne=ns+nodes[j].n.nodeValue.length;if(ne<=s||ns>=e)continue;parts.push({node:nodes[j].n,a:Math.max(s-ns,0),b:Math.min(e-ns,nodes[j].n.nodeValue.length)});var p=nodes[j].n.parentNode;while(p&&p!==el){if(p.classList&&p.classList.contains('sh-placeholder')){inSpan=true;break;}p=p.parentNode;}}if(!inSpan&&parts.length)return parts;}return null;}function wrapParts(parts){for(var i=parts.length-1;i>=0;i--){var t=parts[i].node,txt=t.nodeValue,a=parts[i].a,b=parts[i].b;var span=document.createElement('span');span.className='sh-placeholder';span.textContent=txt.slice(a,b);var f=document.createDocumentFragment();if(a>0)f.appendChild(document.createTextNode(txt.slice(0,a)));f.appendChild(span);if(b<txt.length)f.appendChild(document.createTextNode(txt.slice(b)));t.parentNode.replaceChild(f,t);}}function run(){var st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);document.querySelectorAll('pre,code').forEach(function(el){var guard=0,parts;while((parts=firstMatch(el))&&guard++<500){wrapParts(parts);}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}})();</script><!-- Reference links for workshop episodes --></section></section><section id="aio-07-training-pytorch"><p>Content from <a href="07-training-pytorch.html">Training with PyTorch</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/07-training-pytorch.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2622,7 +2687,7 @@ a model problem</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How do you set up PyTorch for GPU training on Sagehen?</li>
+<li>How do you set up PyTorch for GPU training on Sagehen HPC?</li>
 <li>What does an efficient training loop look like?</li>
 <li>How do you handle GPU memory errors?</li>
 <li>How do you choose between A100, L40S, and RTX PRO 6000 nodes for
@@ -2694,7 +2759,9 @@ oversubscribed, and tying one up for exploratory work makes everyone
 else wait. For final long runs at scale, request A100 with
 <code>--gres=gpu:a100:1</code> in your SLURM script and budget for queue
 time.</p>
-</section><section><h2 class="section-heading" id="gpu-memory-anatomy">GPU Memory Anatomy<a class="anchor" aria-label="anchor" href="#gpu-memory-anatomy"></a>
+<figure><img src="fig/05-memory-management.png" alt="Five responses to a CUDA out of memory error, in order. First halve the batch size, the first thing to try and usually enough. Second use gradient accumulation for the same effective batch with less memory at once. Third use mixed precision in bfloat16 for roughly half the memory at little accuracy cost. Fourth use gradient checkpointing, trading compute for memory. Fifth ask for a bigger card, an A100 80 GB or RTX PRO 6000 96 GB." class="figure mx-auto d-block"><div class="figcaption">Work down the list; each step buys memory at a
+different cost.</div>
+</figure></section><section><h2 class="section-heading" id="gpu-memory-anatomy">GPU Memory Anatomy<a class="anchor" aria-label="anchor" href="#gpu-memory-anatomy"></a>
 </h2>
 <hr class="half-width">
 <p>Before writing the training loop, understand where memory goes. CUDA
@@ -3080,7 +3147,7 @@ tight</li>
 <!-- Reference links for workshop episodes -->
 </section></section><section id="aio-08-training-tensorflow"><p>Content from <a href="08-training-tensorflow.html">Training with TensorFlow</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/08-training-tensorflow.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3094,7 +3161,7 @@ tight</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How do you set up TensorFlow for GPU training on Sagehen?</li>
+<li>How do you set up TensorFlow for GPU training on Sagehen HPC?</li>
 <li>What are the differences between PyTorch and TensorFlow
 workflows?</li>
 <li>How do you use Keras for rapid model development?</li>
@@ -3139,7 +3206,7 @@ PyTorch. If your collaborators or advisor use TensorFlow, or your
 downstream pipeline needs TFLite or TF Serving, TensorFlow is the right
 call. Otherwise default to PyTorch and revisit only if there is a
 specific reason.</p>
-</section><section><h2 class="section-heading" id="setting-up-tensorflow-on-sagehen">Setting Up TensorFlow on Sagehen<a class="anchor" aria-label="anchor" href="#setting-up-tensorflow-on-sagehen"></a>
+</section><section><h2 class="section-heading" id="setting-up-tensorflow-on-sagehen-hpc">Setting Up TensorFlow on Sagehen HPC<a class="anchor" aria-label="anchor" href="#setting-up-tensorflow-on-sagehen-hpc"></a>
 </h2>
 <hr class="half-width">
 <p>The cluster has a system module for TensorFlow, but creating your own
@@ -3416,7 +3483,7 @@ ResNet50, and train for 5 epochs with GPU memory growth enabled.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3480,7 +3547,7 @@ transformer variant whose code only ships in PyTorch.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>A. PyTorch. The HuggingFace Transformers library is PyTorch-first;
 nearly all BERT fine-tuning tutorials and pretrained checkpoints are
@@ -3524,7 +3591,7 @@ sub-linear</li>
 <!-- Reference links for workshop episodes -->
 </section></section><section id="aio-09-checkpointing"><p>Content from <a href="09-checkpointing.html">Checkpointing Long Jobs</a></p>
 <hr>
-<p>Last updated on 2026-08-24 |
+<p>Last updated on 2026-08-27 |
 
         <a href="https://github.com/Pomona-College/hpc-intro-ml/edit/main/episodes/09-checkpointing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3540,7 +3607,7 @@ sub-linear</li>
 <ul>
 <li>How do you save and resume long-running training jobs?</li>
 <li>What should a complete checkpoint include?</li>
-<li>How do you implement multi-GPU training on Sagehen?</li>
+<li>How do you implement multi-GPU training on Sagehen HPC?</li>
 <li>How often should you checkpoint, and where should checkpoints
 live?</li>
 </ul>
@@ -3575,7 +3642,9 @@ good state.</p>
 hyperparameter sweeps that need to fork from a common pretrained state,
 and analysis runs that need to inspect a model at multiple points in
 training to understand its learning dynamics.</p>
-</section><section><h2 class="section-heading" id="what-goes-in-a-checkpoint">What Goes In a Checkpoint<a class="anchor" aria-label="anchor" href="#what-goes-in-a-checkpoint"></a>
+<figure><img src="fig/04-checkpointing.png" alt="A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate." class="figure mx-auto d-block"><div class="figcaption">Save to /bigdata — /scratch disappears with the
+job.</div>
+</figure></section><section><h2 class="section-heading" id="what-goes-in-a-checkpoint">What Goes In a Checkpoint<a class="anchor" aria-label="anchor" href="#what-goes-in-a-checkpoint"></a>
 </h2>
 <hr class="half-width">
 <p>A complete checkpoint must contain enough state to resume training
@@ -3678,8 +3747,8 @@ instead.</p>
 condition.</p>
 <p>For the largest models where each checkpoint is many GB, save to
 <code>/scratch</code> during the run and only move the final or best to
-<code>/bigdata</code>. Hammering NFS with frequent multi-GB writes is
-rude.</p>
+<code>/bigdata</code>. Hammering the shared BeeGFS filesystem with
+frequent multi-GB writes slows the cluster down for everyone.</p>
 </div>
 </div>
 </div>
@@ -3783,13 +3852,13 @@ checkpoint to disk simultaneously.</p>
 with much less boilerplate. The <code>with strategy.scope()</code> block
 must wrap model creation and compilation; <code>fit</code> then
 automatically splits batches and averages gradients.</p>
-<div id="multi-gpu-on-sagehen-when-is-it-worth-it" class="callout">
+<div id="multi-gpu-on-sagehen-hpc-when-is-it-worth-it" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="multi-gpu-on-sagehen-when-is-it-worth-it" class="callout-inner">
-<h3 class="callout-title">Multi-GPU on Sagehen: when is it worth
+<div id="multi-gpu-on-sagehen-hpc-when-is-it-worth-it" class="callout-inner">
+<h3 class="callout-title">Multi-GPU on Sagehen HPC: when is it worth
 it?</h3>
 <div class="callout-content">
 <p>Sagehen GPU nodes typically host 2 GPUs. Going from 1 to 2 GPUs gives
@@ -4518,7 +4587,7 @@ and 2 batch sizes. Collect results in a CSV file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4581,7 +4650,7 @@ hyperparameters.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>A. Grid search. Two dimensions, fast trials, easy to enumerate.</p>
 <p>B. Bayesian optimization. Many dimensions and expensive trials make
@@ -4931,7 +5000,7 @@ for inference</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Create <code>config.yaml</code>, load it in your training script, log
 with TensorBoard, save checkpoints with git hash (as shown above), and
@@ -4972,7 +5041,7 @@ four things you would do, in order, to make this reproducible.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>Initialize git in the project and commit the current state. At
@@ -5069,8 +5138,8 @@ figure 3?”</li>
   "url": "https://pomona-college.github.io/hpc-intro-ml/aio.html",
   "identifier": "https://pomona-college.github.io/hpc-intro-ml/aio.html",
   "dateCreated": "2026-03-05",
-  "dateModified": "2026-08-26",
-  "datePublished": "2026-08-26"
+  "dateModified": "2026-08-27",
+  "datePublished": "2026-08-27"
 }
 
   </script><script>
