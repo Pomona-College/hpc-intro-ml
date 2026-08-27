@@ -24,6 +24,8 @@ Before any model trains, you have to get a Python interpreter, the right framewo
 
 Sagehen has no `pytorch` or `tensorflow` module — Lmod provides the supporting pieces (`miniconda3`, `cuda`), and the framework itself always comes from a conda environment. So the real choice is between reusing an environment someone in your lab already built and building your own. Start by reusing one to confirm the GPU path works end to end, then build your own once you need specific versions or extra packages.
 
+![Each phase belongs on a different partition.](fig/03-ml-phases.png){alt='Five phases and where each belongs: prototype on your laptop, preprocess on the amd partition, train on the gpu partition, evaluate on the amd partition, then publish results. A note warns that preprocessing on a GPU node wastes the card while it sits idle waiting for input and output.'}
+
 ## Understanding Sagehen HPC's Module System
 
 Sagehen uses Lmod (a module system) to manage software versions. Modules provide pre-configured environments without cluttering your shell. Each module sets `PATH`, `LD_LIBRARY_PATH`, and other environment variables for one specific tool, and `module unload` cleanly reverses those changes.

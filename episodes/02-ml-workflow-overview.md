@@ -68,6 +68,8 @@ Real-world speedups on Sagehen:
 
 **Key insight**: GPUs excel at deep learning but don't help with data I/O or tree-based models.
 
+![Size the problem before assuming you need the cluster.](fig/02-when-hpc.png){alt='Four cases by data size. Under 1 GB and under an hour of training: your laptop is fine. One to ten gigabytes taking hours: the laptop will struggle, so use Sagehen HPC. Ten to a hundred gigabytes taking most of a day: use a GPU on the gpu partition. Over a hundred gigabytes taking days: multiple GPUs and checkpointing.'}
+
 ## Sagehen HPC ML Infrastructure
 
 ### Storage Architecture

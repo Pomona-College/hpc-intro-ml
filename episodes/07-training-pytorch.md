@@ -31,6 +31,8 @@ Sagehen hosts **10 GPUs total** across multiple nodes (confirmed by Andrew Wilso
 
 If your model fits comfortably in 48 GB, prototype on an L40S first: they are the least contended GPUs on the cluster. The A100s are oversubscribed, and tying one up for exploratory work makes everyone else wait. For final long runs at scale, request A100 with `--gres=gpu:a100:1` in your SLURM script and budget for queue time.
 
+![Work down the list; each step buys memory at a different cost.](fig/05-memory-management.png){alt='Five responses to a CUDA out of memory error, in order. First halve the batch size, the first thing to try and usually enough. Second use gradient accumulation for the same effective batch with less memory at once. Third use mixed precision in bfloat16 for roughly half the memory at little accuracy cost. Fourth use gradient checkpointing, trading compute for memory. Fifth ask for a bigger card, an A100 80 GB or RTX PRO 6000 96 GB.'}
+
 ## GPU Memory Anatomy
 
 Before writing the training loop, understand where memory goes. CUDA out-of-memory errors are the single most common failure mode for ML jobs on HPC, and they almost always come from misjudging this breakdown:

@@ -24,6 +24,8 @@ GPU jobs on Sagehen can run for many hours, and time-limit boundaries, hardware 
 
 Checkpointing is also the foundation for two other patterns: hyperparameter sweeps that need to fork from a common pretrained state, and analysis runs that need to inspect a model at multiple points in training to understand its learning dynamics.
 
+![Save to /bigdata — /scratch disappears with the job.](fig/04-checkpointing.png){alt='A training loop. Start training, train one epoch, and ask whether this is the best score so far. If it is, save a checkpoint to /bigdata rather than /scratch. Then ask whether there are more epochs; if so, loop back to train another, and if not, load the best checkpoint and evaluate.'}
+
 ## What Goes In a Checkpoint
 
 A complete checkpoint must contain enough state to resume training without changing the result. At minimum:

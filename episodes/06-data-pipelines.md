@@ -26,6 +26,8 @@ A good data pipeline does three things at once. It moves data from persistent st
 
 This episode covers the two halves of that pipeline separately. First, large-scale preprocessing with Dask, run as a CPU-only batch job before training. Second, the per-batch loading machinery that PyTorch and TensorFlow use during training itself.
 
+![Every GPU holds the whole model; only the data is split.](fig/06-distributed-training.png){alt='Data-parallel training. One batch of training data is divided between three GPUs, each holding a full copy of the model and its own slice of the batch. Their gradients are then averaged across every GPU in an all-reduce step. A note warns that four GPUs rarely means four times faster because the all-reduce step is the cost, and to expect around three times.'}
+
 ## Large-Scale Preprocessing with Dask
 
 When the raw dataset is larger than a single node's 512 GB of RAM, or when the cleaning step itself is too slow on one core, Dask gives you parallel pandas-like operations across many cores or many nodes. On a single Sagehen `amd` node Dask can use all 128 cores. The pattern is almost always the same: read lazily, chain transformations, and only call `.compute()` or `.to_parquet()` when you actually need the output.
